@@ -19,62 +19,11 @@ def analisis_opensees(path, permutaciones): #helper, #win
         capas = len(permutaciones[i][6])
         nstep = permutaciones[i][30]
         dt = float(permutaciones[i][31])
-        
-        
-        
+ 
     # creación de elementos 
         sElemX = permutaciones[i][1]    # elementos en X
         sElemZ = permutaciones[i][46]   # espesor en Z   
         
-        
-    
-# =============================================================================
-#         ####### imprimir datos de cada análisis #####
-# =============================================================================
-        
-        # calcular el espesor total 
-        espesor_total = 0
-        for j in range(capas):
-            espesor_total += permutaciones[i][8][j]
-            
-        # Imprimir datos de la columna de suelo
-        print('Características de la columna en análisis\n\n' +
-              'Altura de columna[m]: ' + str(espesor_total) + '\n' +
-              'Ancho de columna[m]: ' + str(sElemX) + '\n' +
-              'Profundidad de nivel freático[m]: ' + str(nf) + '\n' +
-              'Amortiguamiento[%]: ' + str(amort) + '\n' +
-              'Densidad de la roca[ton/m3]: ' + str(den) + '\n' +
-              'Vel. onda de la roca[m/s]: ' + str(vel) + '\n' +
-              'Número de estratos: ' + str(capas) + '\n' +
-              'Pasos de tiempo: ' + str(nstep) + '\n' +
-              'Incremento de tiempo: ' + str(dt) + '\n\n')
-        ##win.ui.progressBar.setValue(5)
-        for j in range(capas):
-            print('Estrato ' + str(j+1) + '\n\n' +
-                  'Tipo: ' + permutaciones[i][6][j] + '\n' +
-                  'Alias: ' + permutaciones[i][7][j] + '\n' +
-                  'Espesor[m]: ' + str(permutaciones[i][8][j]) + '\n' +
-                  '1[%]: ' + str(permutaciones[i][9][j]) + '\n' +
-                  'rho[ton/m3]: ' + str(permutaciones[i][10][j]) + '\n' +
-                  'Vs[m/s]: ' + str(permutaciones[i][11][j]) + '\n' +
-                  'Gr[kPa]: ' + str(permutaciones[i][12][j]) + '\n' +
-                  'Br[kPa]: ' + str(permutaciones[i][13][j]) + '\n' +
-                  'Bc[kPa]: ' + str(permutaciones[i][14][j]) + '\n' +
-                  'f[º]: ' + str(permutaciones[i][15][j]) + '\n' +
-                  'vPerm: ' + str(permutaciones[i][16][j]) + '\n' +
-                  'hPerm: ' + str(permutaciones[i][17][j]) + '\n' +
-                  'refPress: ' + str(permutaciones[i][18][j]) + '\n' +
-                  'gmax: ' + str(permutaciones[i][19][j]) + '\n' +
-                  'pressCoef: ' + str(permutaciones[i][20][j]) + '\n' +
-                  'surf: ' + str(permutaciones[i][21][j]) + '\n' +
-                  'e: ' + str(permutaciones[i][22][j]) + '\n' +
-                  'coef. cont1: ' + str(permutaciones[i][23][j]) + '\n' +
-                  'coef. cont3: ' + str(permutaciones[i][24][j]) + '\n' +
-                  'coef. dilat1: ' + str(permutaciones[i][25][j]) + '\n' +
-                  'coef. dilat3: ' + str(permutaciones[i][26][j]) + '\n' +
-                  'PTAnq[º]: ' + str(permutaciones[i][27][j]) + '\n' +
-                  'cohesion[kPa]: ' + str(permutaciones[i][28][j]) + '\n')
-        #win.ui.progressBar.setValue(10)
         
 # =============================================================================
 #         ######## geometría de la columna ######
@@ -139,7 +88,7 @@ def analisis_opensees(path, permutaciones): #helper, #win
             yCoord=0.0
             nodos = []
             dryNode = []
-            altura_nf = espesor_total - nf
+            altura_nf = 10 - nf
             
             
             for k in range(capas):
@@ -191,9 +140,7 @@ def analisis_opensees(path, permutaciones): #helper, #win
         
         print('Fin de creación de nodos de la base de la columna\n\n') 
         
-             
 
-        
 # =============================================================================
 #         ####### Condiciones de contorno en los nudos restantes #########
 # =============================================================================            
@@ -330,10 +277,7 @@ def analisis_opensees(path, permutaciones): #helper, #win
         
         print('Fin de la creación del elemento de amortiguamiento\n\n')
         
-        #win.ui.progressBar.setValue(30)
-        
-        
-     
+
 #-----------------------------------------------------------------------------------------
 #  9. DEFINE ANALYSIS PARAMETERS
 #-----------------------------------------------------------------------------------------    
@@ -382,10 +326,7 @@ def analisis_opensees(path, permutaciones): #helper, #win
         print('Número de pasos en el análisis: ' + str(nStep) + '\n')
         print('Incremento de tiempo: ' + str(dT) + '\n\n')
 
-        
 
-     
-        
 #----------------------------------------------------------------------------------------
 #  7. GRAVITY ANALYSIS
 #-----------------------------------------------------------------------------------------
@@ -413,7 +354,6 @@ def analisis_opensees(path, permutaciones): #helper, #win
         #win.ui.progressBar.setValue(40)
         
         # update materials to consider plastic behavior
-        
         
       
 # =============================================================================
